@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4451" systemVersion="13A461" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="vXZ-lx-hvc">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733.0"/>
+    </dependencies>
+    <scenes>
+        <!--class Prefix:identifier View Controller-->
+        <scene sceneID="ufC-wZ-h7g">
+            <objects>
+                <viewController id="vXZ-lx-hvc" customClass="WePayBindingTestViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="3"/>
+                        <viewControllerLayoutGuide type="bottom" id="4"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="kh9-bI-dsS">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="5" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" selected="YES">
+                                <rect key="frame" x="31" y="91" width="200" height="30"/>
+                                <state key="normal" title="Get Swiped Card Information">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="InformationButton_TouchUpInside:" destination="vXZ-lx-hvc" id="6" eventType="touchUpInside"/>
+                                </connections>
+                            </button>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="9" translatesAutoresizingMaskIntoConstraints="NO">
+                                <rect key="frame" x="20" y="276" width="280" height="272"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <constraints>
+                                    <constraint id="122" firstAttribute="width" constant="280"/>
+                                    <constraint id="123" firstAttribute="height" constant="272"/>
+                                </constraints>
+                            </textView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="48" translatesAutoresizingMaskIntoConstraints="NO" selected="YES" fixedFrame="YES">
+                                <rect key="frame" x="20" y="129" width="250" height="30"/>
+                                <state key="normal" title="Tokenize Swiped Card Information">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="InformationButton_TouchUpInside:" destination="50" id="49" eventType="touchUpInside"/>
+                                    <action selector="TokenizeButton_TouchUpInside:" destination="BYZ-38-t0r" id="51" eventType="touchUpInside"/>
+                                    <action selector="TokenizeButton_TouchUpInside:" destination="vXZ-lx-hvc" id="52" eventType="touchUpInside"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="110" translatesAutoresizingMaskIntoConstraints="NO" selected="YES">
+                                <rect key="frame" x="20" y="174" width="250" height="30"/>
+                                <state key="normal" title="Tokenize Manual Card Information">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="InformationButton_TouchUpInside:" destination="112" id="111" eventType="touchUpInside"/>
+                                    <action selector="TokenizeButton_TouchUpInside:" destination="114" id="113" eventType="touchUpInside"/>
+                                    <action selector="TokenizeManualButton_TouchUpInside:" destination="BYZ-38-t0r" id="115" eventType="touchUpInside"/>
+                                    <action selector="TokenizeManualButton_TouchUpInside:" destination="vXZ-lx-hvc" id="116" eventType="touchUpInside"/>
+                                </connections>
+                                <constraints>
+                                    <constraint id="129" firstAttribute="width" constant="250"/>
+                                </constraints>
+                            </button>
+                        </subviews>
+                        <constraints>
+                            <constraint id="120" constant="20" firstItem="kh9-bI-dsS" firstAttribute="trailing" secondItem="9" secondAttribute="trailing"/>
+                            <constraint id="121" constant="20" firstItem="kh9-bI-dsS" firstAttribute="bottom" secondItem="9" secondAttribute="bottom"/>
+                            <constraint id="130" constant="20" firstItem="110" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading"/>
+                            <constraint id="131" constant="174" firstItem="110" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="top"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="InformationButton" destination="5" id="name-outlet-5"/>
+                        <outlet property="StatusText" destination="9" id="name-outlet-9"/>
+                        <outlet property="TokenizeButton" destination="48" id="name-outlet-48"/>
+                        <outlet property="TokenizeManualButton" destination="110" id="name-outlet-110"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="0.0" y="0.0"/>
+        </scene>
+    </scenes>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination" type="retina4"/>
+    </simulatedMetricsContainer>
+</document>
