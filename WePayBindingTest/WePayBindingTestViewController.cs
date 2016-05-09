@@ -19,14 +19,6 @@ namespace WePayBindingTest
 		{
 		}
 
-		public override void DidReceiveMemoryWarning ()
-		{
-			// Releases the view if it doesn't have a superview.
-			base.DidReceiveMemoryWarning ();
-			
-			// Release any cached data, images, etc that aren't in use.
-		}
-
 		#region View lifecycle
 
 		public override void ViewDidLoad ()
@@ -35,26 +27,6 @@ namespace WePayBindingTest
 			
 			var config = new WPConfig ("171482", WePayEnviroment.Stage);
 			wePay = new WePay (config);
-		}
-
-		public override void ViewWillAppear (bool animated)
-		{
-			base.ViewWillAppear (animated);
-		}
-
-		public override void ViewDidAppear (bool animated)
-		{
-			base.ViewDidAppear (animated);
-		}
-
-		public override void ViewWillDisappear (bool animated)
-		{
-			base.ViewWillDisappear (animated);
-		}
-
-		public override void ViewDidDisappear (bool animated)
-		{
-			base.ViewDidDisappear (animated);
 		}
 
 		public void UpdateStatus (string delegateName, string methodName, string msg)
@@ -74,67 +46,16 @@ namespace WePayBindingTest
 
 		partial void InformationButton_TouchUpInside (UIButton sender)
 		{
-			wePay.StartSwiperForReadingWithSwiperDelegate (new SwiperDelegate (UpdateStatus));
+			wePay.StartCardReaderForReadingWithCardReaderDelegate (new SwiperDelegate (UpdateStatus));
 		}
 
 		partial void TokenizeButton_TouchUpInside (UIButton sender)
 		{
-			wePay.StartSwiperForTokenizingWithSwiperDelegate (new SwiperDelegate (UpdateStatus), new TokenizationDelegate (UpdateStatus));
+			wePay.StartCardReaderForTokenizingWithCardReaderDelegate (new SwiperDelegate (UpdateStatus), new TokenizationDelegate (UpdateStatus), new AuthorizationDelegate (UpdateStatus));
 		}
 
 		partial void TokenizeManualButton_TouchUpInside (UIButton sender)
 		{
-//			NSDictionary cardInfo = @{
-//				@"firstName": @"WPiOS",
-//				@"lastName": @"Example",
-//				@"email": @"wp.ios.example@wepay.com",
-//				@"billing_address": @{@"zip":@"94306", @"country":@"US"},
-//				@"cc_number": @"5496198584584769",
-//				@"cvv": @"123",
-//				@"expiration_month": @"04",
-//				@"expiration_year": @"2015",
-//				@"virtualTerminal":@(YES)
-//			};
-
-			var cardInfo = new NSMutableDictionary ();
-			cardInfo.Add (new NSString ("firstName"), new NSString ("WPiOS"));
-			cardInfo.Add (new NSString ("lastName"), new NSString ("Example"));
-			cardInfo.Add (new NSString ("email"), new NSString ("wp.ios.example@wepay.com"));
-			var billingAddress = new NSMutableDictionary ();
-			billingAddress.Add (new NSString ("zip"), new NSString ("94306"));
-			billingAddress.Add (new NSString ("country"), new NSString ("US"));
-
-
-			//cardInfo.SetValueForKey (billingAddress, new NSString ("billing_address"));
-			cardInfo.Add (new NSString ("billing_address"), billingAddress);
-			cardInfo.Add (new NSString ("cc_number"), new NSString ("5496198584584769"));
-			cardInfo.Add (new NSString ("expiration_month"), new NSString ("04"));
-			cardInfo.Add (new NSString ("expiration_year"), new NSString ("2015"));
-			cardInfo.Add (new NSString ("virtualTerminal"), new NSString ("YES"));
-
-			Console.WriteLine (cardInfo);
-//			var keys = new NSObject[] {
-//				new NSString ("firstName"),
-//				new NSString ("lastName"),
-//				new NSString ("email"),
-//				new NSString ("billing_address"),
-//				new NSString ("cc_number"),
-//				new NSString ("expiration_month"),
-//				new NSString ("expiration_year"),
-//				new NSString ("virtualTerminal")
-//			};
-//
-//			var values = new NSObject [] {
-//				new NSString ("WPiOS"),
-//				new NSString ("Example"),
-//				new NSString ("wp.ios.example@wepay.com"),
-//				new NSString ("sdf"),
-//				new NSString ("5496198584584769"),
-//				new NSString ("04"),
-//				new NSString ("2015"),
-//				new NSString ("YES")
-//			};
-//			var cardInfo = NSDictionary.FromObjectsAndKeys (values, keys);
 			var address = new WPAddress ("33056");
 
 			var info = new WPPaymentInfo ("first name", "last name", "email@valid.com", address, address, "5496198584584769", "123", "04", "2018", true);
@@ -163,14 +84,14 @@ namespace WePayBindingTest
 			{
 				_updateStatus ("TokenizationDelegate", "DidTokenize", "paymentInfo: " + paymentInfo.ToString () + " - paymentToken: " + paymentToken.ToString ());
 
-				var image = UIImage.FromBundle ("signature.png");
+				//var image = UIImage.FromBundle ("signature.png");
 				//wePay.StoreSignatureImage (image, "12345", new SignatureDelegate ());
 			}
 
 			#endregion
 		}
 
-		class SwiperDelegate : WPSwiperDelegate
+		class SwiperDelegate : WPCardReaderDelegate
 		{
 			Action<string, string, string> _updateStatus;
 
@@ -191,16 +112,22 @@ namespace WePayBindingTest
 				_updateStatus ("SwiperDelegate", "DidReadPaymentInfo", paymentInfo.ToString ());
 			}
 
-			public override void SwiperDidChangeStatus (NSObject status)
+			public override void CardReaderDidChangeStatus (NSObject status)
 			{
 				_updateStatus ("SwiperDelegate", "SwiperDidChangeStatus", status.ToString ());
 			}
 
-			#endregion
+			public override void AuthorizeAmountWithCompletion (Action<NSDecimalNumber, NSString, nint> completion)
+			{
+				var amout = new NSDecimalNumber ("21.61");
+				var currency = new NSString ("USD");
+				completion (amout, currency, 1170640190);
+			}
 
+			#endregion
 		}
 
-		class SignatureDelegate : WPSignatureDelegate
+		class SignatureDelegate : WPCheckoutDelegate
 		{
 			Action<string, string, string> _updateStatus;
 
@@ -222,8 +149,35 @@ namespace WePayBindingTest
 			}
 
 			#endregion
+		}
 
+		class AuthorizationDelegate : WPAuthorizationDelegate
+		{
+			Action<string, string, string> _updateStatus;
 
+			public AuthorizationDelegate (Action<string, string, string> updateStatus)
+			{
+				_updateStatus = updateStatus;
+			}
+
+			#region implemented abstract members of WPAuthorizationDelegate
+
+			public override void DidAuthorize (WPPaymentInfo paymentInfo, WPAuthorizationInfo authorizationInfo)
+			{
+				_updateStatus ("AuthorizationDelegate", "DidAuthorize", "paymentInfo: " + paymentInfo.ToString () + " - paymentToken: " + authorizationInfo.ToString ());
+			}
+
+			public override void DidFailAuthorization (WPPaymentInfo paymentInfo, NSError error)
+			{
+				_updateStatus ("AuthorizationDelegate", "DidFailAuthorization", error.ToString ());
+			}
+
+			public override void SelectEMVApplication (NSObject[] applications, Action<nint> completion)
+			{
+				_updateStatus ("AuthorizationDelegate", "DidFailAuthorization", applications.ToString ());
+			}
+
+			#endregion
 		}
 	}
 }
