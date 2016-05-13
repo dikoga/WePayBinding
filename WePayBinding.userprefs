@@ -1,29 +1,27 @@
 ﻿<Properties StartupItem="WePayBindingTest/WePayBindingTest.csproj" RefactoringSettings.EnableRefactorings="True">
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|iPhone" PreferredExecutionTarget="MonoDevelop.IPhone.IPhoneDeviceTarget.iPhone" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="WePayBinding/WePay.linkwith.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|iPhone" PreferredExecutionTarget="MonoDevelop.IPhone.IPhoneDeviceTarget.3dcart developers 2" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="WePayBindingTest/WePayBindingTestViewController.cs">
     <Files>
-      <File FileName="WePayBinding/ApiDefinition.cs" Line="158" Column="3" />
-      <File FileName="WePayBinding/G4XSwiper-4.6.3.linkwith.cs" Line="4" Column="140" />
-      <File FileName="WePayBinding/libMPOSCommunicationManager.linkwith.cs" Line="4" Column="177" />
-      <File FileName="WePayBinding/RUA.linkwith.cs" Line="4" Column="153" />
-      <File FileName="WePayBinding/TrustDefenderMobile.linkwith.cs" Line="3" Column="169" />
-      <File FileName="WePayBinding/WePay.linkwith.cs" Line="4" Column="332" />
+      <File FileName="WePayBinding/ApiDefinition.cs" Line="1" Column="1" />
+      <File FileName="WePayBindingTest/Main.cs" Line="1" Column="1" />
+      <File FileName="WePayBindingTest/WePayBindingTestViewController.cs" Line="55" Column="1" />
+      <File FileName="WePayBinding/WePay.linkwith.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore>
-      <Breakpoint file="/Users/dikoga/Projects/WePayBinding/WePayBindingTest/WePayBindingTestViewController.cs" line="135" column="1" />
-      <Breakpoint file="/Users/dikoga/Projects/WePayBinding/WePayBindingTest/WePayBindingTestViewController.cs" line="111" column="1" />
-      <Breakpoint file="/Users/dikoga/Projects/WePayBinding/WePayBindingTest/WePayBindingTestViewController.cs" line="106" column="1" />
-      <Breakpoint file="/Users/dikoga/Projects/WePayBinding/WePayBindingTest/WePayBindingTestViewController.cs" line="116" column="1" />
-      <Breakpoint file="/Users/dikoga/Projects/WePayBinding/WePayBindingTest/WePayBindingTestViewController.cs" line="121" column="1" />
-      <Breakpoint file="/Users/dikoga/Projects/WePayBinding/WePayBindingTest/WePayBindingTestViewController.cs" line="142" column="1" />
-      <Breakpoint file="/Users/dikoga/Projects/WePayBinding/WePayBindingTest/WePayBindingTestViewController.cs" line="147" column="1" />
-      <Breakpoint file="/Users/dikoga/Projects/WePayBinding/WePayBindingTest/WePayBindingTestViewController.cs" line="166" column="1" />
-      <Breakpoint file="/Users/dikoga/Projects/WePayBinding/WePayBindingTest/WePayBindingTestViewController.cs" line="171" column="1" />
+      <Breakpoint file="/Users/dikoga/Projects/WePayBinding/WePayBindingTest/WePayBindingTestViewController.cs" line="145" column="1" />
+      <Breakpoint file="/Users/dikoga/Projects/WePayBinding/WePayBindingTest/WePayBindingTestViewController.cs" line="115" column="1" />
+      <Breakpoint file="/Users/dikoga/Projects/WePayBinding/WePayBindingTest/WePayBindingTestViewController.cs" line="110" column="1" />
+      <Breakpoint file="/Users/dikoga/Projects/WePayBinding/WePayBindingTest/WePayBindingTestViewController.cs" line="120" column="1" />
+      <Breakpoint file="/Users/dikoga/Projects/WePayBinding/WePayBindingTest/WePayBindingTestViewController.cs" line="125" column="1" />
+      <Breakpoint file="/Users/dikoga/Projects/WePayBinding/WePayBindingTest/WePayBindingTestViewController.cs" line="152" column="1" />
+      <Breakpoint file="/Users/dikoga/Projects/WePayBinding/WePayBindingTest/WePayBindingTestViewController.cs" line="157" column="1" />
       <Breakpoint file="/Users/dikoga/Projects/WePayBinding/WePayBindingTest/WePayBindingTestViewController.cs" line="176" column="1" />
-      <Breakpoint file="/Users/dikoga/Projects/WePayBinding/WePayBindingTest/WePayBindingTestViewController.cs" line="80" column="1" />
-      <Breakpoint file="/Users/dikoga/Projects/WePayBinding/WePayBindingTest/WePayBindingTestViewController.cs" line="84" column="1" />
+      <Breakpoint file="/Users/dikoga/Projects/WePayBinding/WePayBindingTest/WePayBindingTestViewController.cs" line="186" column="1" />
+      <Breakpoint file="/Users/dikoga/Projects/WePayBinding/WePayBindingTest/Main.cs" line="31" column="36" />
+      <Breakpoint file="/Users/dikoga/Projects/WePayBinding/WePayBindingTest/Main.cs" line="37" column="1" />
+      <Breakpoint file="/Users/dikoga/Projects/WePayBinding/WePayBindingTest/WePayBindingTestViewController.cs" line="181" column="1" />
     </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />

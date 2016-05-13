@@ -153,8 +153,8 @@ namespace WePayBinding
 		NSObject EmvInfo { get; }
 
 		// -(instancetype)initWithSwipedInfo:(id)swipedInfo;
-		//[Export ("initWithSwipedInfo:")]
-		//IntPtr Constructor (NSObject swipedInfo);
+		[Export ("initWithSwipedInfo:")]
+		IntPtr Constructor (NSDictionary swipedInfo);
 
 		// -(instancetype)initWithEMVInfo:(id)emvInfo;
 		[Export ("initWithEMVInfo:")]
@@ -308,6 +308,10 @@ namespace WePayBinding
 		[Abstract]
 		[Export ("paymentInfo:didFailAuthorization:")]
 		void DidFailAuthorization (WPPaymentInfo paymentInfo, NSError error);
+
+		// @optional -(void)insertPayerEmailWithCompletion:(void (^)(NSString *))completion;
+		[Export ("insertPayerEmailWithCompletion:")]
+		void InsertPayerEmailWithCompletion (Action<NSString> completion);
 	}
 
 	// @protocol WPTokenizationDelegate <NSObject>
@@ -324,10 +328,6 @@ namespace WePayBinding
 		[Abstract]
 		[Export ("paymentInfo:didFailTokenization:")]
 		void DidFailTokenization (WPPaymentInfo paymentInfo, NSError error);
-
-		// @optional -(void)insertPayerEmailWithCompletion:(void (^)(NSString *))completion;
-		[Export ("insertPayerEmailWithCompletion:")]
-		void InsertPayerEmailWithCompletion (Action<NSString> completion);
 	}
 
 	// @protocol WPCardReaderDelegate <NSObject>

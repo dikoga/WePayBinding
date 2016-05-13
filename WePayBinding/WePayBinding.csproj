@@ -40,20 +40,20 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="G4XSwiper-4.6.3.linkwith.cs">
-      <DependentUpon>G4XSwiper-4.6.3.a</DependentUpon>
-    </Compile>
-    <Compile Include="libMPOSCommunicationManager.linkwith.cs">
-      <DependentUpon>libMPOSCommunicationManager.a</DependentUpon>
-    </Compile>
-    <Compile Include="RUA.linkwith.cs">
-      <DependentUpon>RUA.a</DependentUpon>
-    </Compile>
     <Compile Include="TrustDefenderMobile.linkwith.cs">
       <DependentUpon>TrustDefenderMobile.a</DependentUpon>
     </Compile>
     <Compile Include="WePay.linkwith.cs">
       <DependentUpon>WePay.a</DependentUpon>
+    </Compile>
+    <Compile Include="G4XSwiper.linkwith.cs">
+      <DependentUpon>G4XSwiper.a</DependentUpon>
+    </Compile>
+    <Compile Include="RPx.linkwith.cs">
+      <DependentUpon>RPx.a</DependentUpon>
+    </Compile>
+    <Compile Include="RUA.linkwith.cs">
+      <DependentUpon>RUA.a</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -64,10 +64,10 @@
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.ObjCBinding.CSharp.targets" />
   <ItemGroup>
-    <ObjcBindingNativeLibrary Include="G4XSwiper-4.6.3.a" />
-    <ObjcBindingNativeLibrary Include="libMPOSCommunicationManager.a" />
-    <ObjcBindingNativeLibrary Include="RUA.a" />
     <ObjcBindingNativeLibrary Include="TrustDefenderMobile.a" />
     <ObjcBindingNativeLibrary Include="WePay.a" />
+    <ObjcBindingNativeLibrary Include="G4XSwiper.a" />
+    <ObjcBindingNativeLibrary Include="RPx.a" />
+    <ObjcBindingNativeLibrary Include="RUA.a" />
   </ItemGroup>
 </Project>

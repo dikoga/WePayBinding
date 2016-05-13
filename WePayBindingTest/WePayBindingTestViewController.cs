@@ -4,6 +4,7 @@ using System.Drawing;
 using Foundation;
 using UIKit;
 using WePayBinding;
+using Xamarin;
 
 namespace WePayBindingTest
 {
@@ -25,7 +26,7 @@ namespace WePayBindingTest
 		{
 			base.ViewDidLoad ();
 			
-			var config = new WPConfig ("171482", WePayEnviroment.Stage);
+			var config = new WPConfig ("171482", WePayEnviroment.Stage, true, false, false, false, false, false);
 			wePay = new WePay (config);
 		}
 
@@ -46,12 +47,14 @@ namespace WePayBindingTest
 
 		partial void InformationButton_TouchUpInside (UIButton sender)
 		{
-			wePay.StartCardReaderForReadingWithCardReaderDelegate (new SwiperDelegate (UpdateStatus));
+			wePay.StartCardReaderForReadingWithCardReaderDelegate (new CardReaderDelegate (UpdateStatus));
 		}
 
 		partial void TokenizeButton_TouchUpInside (UIButton sender)
 		{
-			wePay.StartCardReaderForTokenizingWithCardReaderDelegate (new SwiperDelegate (UpdateStatus), new TokenizationDelegate (UpdateStatus), new AuthorizationDelegate (UpdateStatus));
+			Insights.Report (new Exception ("tokenizing"));
+
+			wePay.StartCardReaderForTokenizingWithCardReaderDelegate (new CardReaderDelegate (UpdateStatus), new TokenizationDelegate (UpdateStatus), new AuthorizationDelegate (UpdateStatus));
 		}
 
 		partial void TokenizeManualButton_TouchUpInside (UIButton sender)
@@ -91,11 +94,11 @@ namespace WePayBindingTest
 			#endregion
 		}
 
-		class SwiperDelegate : WPCardReaderDelegate
+		class CardReaderDelegate : WPCardReaderDelegate
 		{
 			Action<string, string, string> _updateStatus;
 
-			public SwiperDelegate (Action<string, string, string> updateStatus)
+			public CardReaderDelegate (Action<string, string, string> updateStatus)
 			{
 				_updateStatus = updateStatus;
 			}
@@ -104,25 +107,31 @@ namespace WePayBindingTest
 
 			public override void DidFailToReadPaymentInfoWithError (NSError error)
 			{
-				_updateStatus ("SwiperDelegate", "DidFailToReadPaymentInfoWithError", error.ToString ());
+				_updateStatus ("CardReaderDelegate", "DidFailToReadPaymentInfoWithError", error.ToString ());
 			}
 
 			public override void DidReadPaymentInfo (WPPaymentInfo paymentInfo)
 			{
-				_updateStatus ("SwiperDelegate", "DidReadPaymentInfo", paymentInfo.ToString ());
+				_updateStatus ("CardReaderDelegate", "DidReadPaymentInfo", paymentInfo.ToString ());
 			}
 
 			public override void CardReaderDidChangeStatus (NSObject status)
 			{
-				_updateStatus ("SwiperDelegate", "SwiperDidChangeStatus", status.ToString ());
+				_updateStatus ("CardReaderDelegate", "SwiperDidChangeStatus", status.ToString ());
 			}
 
 			public override void AuthorizeAmountWithCompletion (Action<NSDecimalNumber, NSString, nint> completion)
 			{
+				_updateStatus ("CardReaderDelegate", "AuthorizeAmountWithCompletion", "amount");
 				var amout = new NSDecimalNumber ("21.61");
 				var currency = new NSString ("USD");
 				completion (amout, currency, 1170640190);
 			}
+
+			//			public override void ShouldResetCardReaderWithCompletion (Action<bool> completion)
+			//			{
+			//				completion (false);
+			//			}
 
 			#endregion
 		}
@@ -174,7 +183,14 @@ namespace WePayBindingTest
 
 			public override void SelectEMVApplication (NSObject[] applications, Action<nint> completion)
 			{
-				_updateStatus ("AuthorizationDelegate", "DidFailAuthorization", applications.ToString ());
+				completion (0);
+				_updateStatus ("AuthorizationDelegate", "SelectEMVApplication", applications.ToString ());
+			}
+
+			public override void InsertPayerEmailWithCompletion (Action<NSString> completion)
+			{
+				completion (new NSString ("emv@example.com"));
+				_updateStatus ("AuthorizationDelegate", "InsertPayerEmailWithCompletion", "emv@example.com");
 			}
 
 			#endregion
